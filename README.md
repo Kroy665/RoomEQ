@@ -9,6 +9,7 @@
 ![Tests](https://img.shields.io/badge/tests-70%2B%20passing-2ea44f)
 ![Real-time](https://img.shields.io/badge/audio-allocation--free%20real--time-6f42c1)
 ![No cloud](https://img.shields.io/badge/runs-100%25%20local-0a7ea4)
+![License: MIT](https://img.shields.io/badge/license-MIT-blue)
 
 [**▶ Watch the 5-minute walkthrough**](docs/media/roomeq-walkthrough.mp4) ·
 [Try it without hardware](#try-it-in-60-seconds-no-hardware) ·
@@ -179,6 +180,10 @@ uv run pytest          # about a minute
 
 The walkthrough video is reproducible from `video/` (narration script, recorder actions, demo mode);
 see [video/README.md](video/README.md).
+
+## License
+
+[MIT](LICENSE) © 2026 Koushik Roy
 
 ---
 
