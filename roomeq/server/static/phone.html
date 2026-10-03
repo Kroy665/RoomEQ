@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f1115">
+  <title>RoomEQ Measure</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <main>
+    <header>
+      <h1>RoomEQ</h1>
+      <span id="conn" class="pill">not connected</span>
+    </header>
+
+    <section id="insecure" class="card warn" hidden>
+      <h2>One-time setup: trust RoomEQ on this phone</h2>
+      <p>Safari only allows the microphone over HTTPS. RoomEQ made its own certificate. Install it once:</p>
+      <ol>
+        <li><a id="ca-link" href="/roomeq-ca.cer">Download the RoomEQ certificate</a>, then tap <b>Allow</b>.</li>
+        <li>Open <b>Settings → General → VPN &amp; Device Management</b>, tap <b>RoomEQ Local CA</b>, then <b>Install</b>.</li>
+        <li>Open <b>Settings → General → About → Certificate Trust Settings</b> and switch on <b>RoomEQ Local CA</b>.</li>
+        <li>Then open <a id="https-link" href="#">the secure page</a>.</li>
+      </ol>
+    </section>
+
+    <section id="start-card" class="card">
+      <h2>Measure your room</h2>
+      <p>Keep this page open with the screen on for the whole measurement.</p>
+      <button id="start" class="primary">Start microphone</button>
+      <p id="start-error" class="error" hidden></p>
+    </section>
+
+    <section id="live" class="card" hidden>
+      <div class="row">
+        <span>Mic level</span>
+        <span id="level-text" class="mono">-- dBFS</span>
+      </div>
+      <div class="meter"><div id="meter-fill"></div></div>
+      <div class="row small">
+        <span id="rate" class="mono"></span>
+        <span id="transport" class="mono"></span>
+      </div>
+      <p id="processing" class="small warn-text" hidden></p>
+    </section>
+
+    <section id="instruction" class="card accent" hidden>
+      <p id="step" class="small"></p>
+      <h2 id="instruction-title"></h2>
+      <p id="instruction-text"></p>
+      <button id="ready" class="primary" hidden>Ready, start the sweep</button>
+    </section>
+
+    <section id="status-card" class="card" hidden>
+      <p id="status" class="status"></p>
+    </section>
+
+    <section id="result" class="card" hidden>
+      <h2>Result</h2>
+      <pre id="result-text" class="mono"></pre>
+      <ul id="result-warnings" class="warn-list"></ul>
+    </section>
+
+    <footer class="small">
+      Phone mics are accurate for bass and low mids but rough above a few kHz, so RoomEQ mainly corrects
+      below 500 Hz. EQ cannot fix speaker placement or fill room nulls.
+    </footer>
+  </main>
+  <script src="/static/phone.js"></script>
+</body>
+</html>

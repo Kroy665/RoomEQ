@@ -1,0 +1,62 @@
+[
+  {
+    "id": "intro",
+    "text": "This is RoomEQ. It tunes a home audio system to the room it lives in. It measures the room with an iPhone microphone, works out a parametric E Q, and applies it in real time to everything the Mac plays. Every part of it runs locally, on the Mac."
+  },
+  {
+    "id": "demo_mode",
+    "text": "For this tour it runs in demo mode, shown by the blue badge at the top. The audio engine, the solver and this dashboard are the real thing. Only the outside world is simulated. A music source, a small living room with a two point one speaker system, and a virtual phone that follows the instructions on screen."
+  },
+  {
+    "id": "controls",
+    "text": "The top bar controls the live audio. E Q on, or bypass, for a quick A B comparison. Bypass keeps the same preamp, so you compare tone, not loudness. A volume trim, and live meters for the input and the output. Next to them, the limiter, the added latency, the clock drift between the two audio devices, and a glitch counter."
+  },
+  {
+    "id": "safety",
+    "text": "Safety comes first, because a bad filter should never blast the speakers. The panic button, or the space bar, bypasses the E Q instantly and drops the level by twenty decibels. Press it again and the sound fades back in. Behind it sits a look-ahead limiter that never lets the output clip."
+  },
+  {
+    "id": "measure_card",
+    "text": "Measuring starts down here. On a real setup you scan this card's code with your iPhone. The phone opens a small web page, and streams raw microphone audio to the Mac over Wi-Fi, with echo cancellation, noise suppression and automatic gain all switched off. Here, the virtual phone is already connected."
+  },
+  {
+    "id": "phone_page",
+    "text": "This is the page the phone sees the first time. Safari only allows the microphone over a secure connection, so it walks you through trusting RoomEQ's own certificate, in three short steps. After that, it shows a start button, a live level meter, and the instructions for each listening position."
+  },
+  {
+    "id": "autotune_start",
+    "text": "Now the main job, live. Auto-tune. A short burst of noise checks the level first. Then the Mac plays a sweep from twenty hertz to twenty kilohertz, framed by two sync markers. The phone and the Mac run on different clocks, so the markers also measure the clock drift, and the recording is corrected before it is analysed."
+  },
+  {
+    "id": "autotune_rounds",
+    "text": "After the first round, the solver fits up to ten filters. It prefers cuts over boosts, and leaves deep narrow dips alone. Then every listening position is measured twice, with the E Q off and with it on, without moving the phone. That way the improvement it reports is a fair comparison, even in a room where the bass changes from seat to seat. The best round wins."
+  },
+  {
+    "id": "result_chart",
+    "text": "Here is the result. Orange is the room before, measured. Blue is after, also measured, through the live E Q. The dotted line is the target, with a gentle bass lift and a slight treble tilt. The bands show where it corrects. Fully below five hundred hertz, gently up to four kilohertz, and not at all above that, where a phone microphone is unreliable."
+  },
+  {
+    "id": "eq_curve",
+    "text": "Below it is the E Q the engine is applying, including the automatic preamp that keeps headroom. Hover anywhere for exact values. Every number in the chart is also available as a table."
+  },
+  {
+    "id": "filters",
+    "text": "The filters are fully editable. Frequency, gain and Q. Let's soften this one, and apply. The new E Q runs silently for a moment, then crossfades in, so there is never a click. The chart switches to a dashed prediction until the next measurement, and values that could hurt the speakers are refused."
+  },
+  {
+    "id": "verify",
+    "text": "Verify E Q checks the whole chain. Four sweeps, with the phone left in one place. Bypassed, through the E Q, ten decibels quieter, and once more for repeatability. Because nothing moves, the room cancels out. It proves the E Q reaches the speakers exactly as designed, and that the speaker sounds the same at both levels."
+  },
+  {
+    "id": "real_room",
+    "text": "Now a real result, from an actual living room, with an F and D two point one speaker system and an iPhone fifteen. Before, a bass build-up of more than ten decibels. After, measured through the E Q, the bass sits close to the target. Every result is saved as a preset, and nothing is ever overwritten."
+  },
+  {
+    "id": "notes",
+    "text": "RoomEQ is honest about its limits. These notes come from the measurement itself. No E Q can fill a room null or fix speaker placement, and a phone microphone is rough at high frequencies. When the bass is simply too loud, it tells you to turn the subwoofer down on the speaker, which beats any E Q."
+  },
+  {
+    "id": "outro",
+    "text": "Under the hood, the audio path is allocation free and compiled, with an adaptive resampler that tracks clock drift, all covered by more than seventy automated tests. RoomEQ. Measure with your phone, hear your room the way it should sound."
+  }
+]

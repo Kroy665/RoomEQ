@@ -1,0 +1,32 @@
+[project]
+name = "roomeq"
+version = "0.1.0"
+description = "Automatic room EQ for macOS: measure with your phone, correct with a real-time parametric EQ."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "cryptography>=50.0.2",
+    "fastapi>=0.142.2",
+    "numba>=0.68.0",
+    "numpy>=1.26",
+    "qrcode>=8.2",
+    "scipy>=1.12",
+    "sounddevice>=0.5.6",
+    "uvicorn[standard]>=0.54.0",
+]
+
+[project.scripts]
+roomeq = "roomeq.cli:main"
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+    "pytest>=8",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

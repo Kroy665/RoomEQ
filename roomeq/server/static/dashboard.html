@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RoomEQ Dashboard</title>
+  <link rel="stylesheet" href="/static/dashboard.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <h1>RoomEQ</h1>
+      <span id="preset-name" class="muted"></span>
+      <span id="eq-pill" class="pill"></span>
+      <span id="demo-pill" class="pill demo" hidden title="Simulated room and phone: no audio hardware is used">Demo: simulated room</span>
+    </div>
+    <div class="top-actions">
+    <button id="theme" type="button" class="ghost theme" aria-label="Colour theme">Auto</button>
+    <button id="panic" class="panic" title="Instant EQ bypass and −20 dB (Space)">
+      <span aria-hidden="true">■</span> <span id="panic-label">PANIC</span>
+    </button>
+    </div>
+  </header>
+
+  <main class="grid">
+    <section class="card controls" aria-label="Playback controls">
+      <div class="control">
+        <span class="label">EQ</span>
+        <div class="seg" role="group" aria-label="EQ on or bypassed">
+          <button id="eq-on" type="button">On</button>
+          <button id="eq-off" type="button">Bypass</button>
+        </div>
+        <span class="hint">Bypass keeps the preamp, so A/B is level-matched. Shortcut: B</span>
+      </div>
+      <div class="control volume">
+        <label class="label" for="volume">Volume trim</label>
+        <input id="volume" type="range" min="-40" max="0" step="0.5" value="0">
+        <span id="volume-val" class="value num">0.0 dB</span>
+      </div>
+      <div class="stats">
+        <div class="stat"><span class="label">Input</span><div class="meter"><div id="m-in"></div></div><span id="s-in" class="num small"></span></div>
+        <div class="stat"><span class="label">Output</span><div class="meter"><div id="m-out"></div></div><span id="s-out" class="num small"></span></div>
+        <div class="stat"><span class="label">Limiter</span><span id="s-gr" class="value num"></span></div>
+        <div class="stat"><span class="label">Latency</span><span id="s-lat" class="value num"></span></div>
+        <div class="stat"><span class="label">Clock drift</span><span id="s-drift" class="value num"></span></div>
+        <div class="stat"><span class="label">Glitches</span><span id="s-glitch" class="value num"></span></div>
+      </div>
+    </section>
+
+    <section class="card chart-card" aria-labelledby="resp-title">
+      <div class="card-head">
+        <div>
+          <h2 id="resp-title">Response at the listening position</h2>
+          <p id="rms-line" class="muted"></p>
+        </div>
+        <div id="legend" class="legend" aria-label="Legend"></div>
+      </div>
+      <div id="chart-resp" class="chart" role="img" aria-label="Frequency response chart"></div>
+      <h3 class="sub">Applied EQ <span class="muted">(filters + preamp)</span></h3>
+      <div id="chart-eq" class="chart small-chart" role="img" aria-label="EQ curve chart"></div>
+      <details class="table-view">
+        <summary>Show as table</summary>
+        <div id="data-table"></div>
+      </details>
+    </section>
+
+    <section class="card" aria-labelledby="filters-title">
+      <div class="card-head">
+        <h2 id="filters-title">Filters</h2>
+        <span id="preamp" class="muted num"></span>
+      </div>
+      <table class="filters">
+        <thead><tr><th>#</th><th>Type</th><th>Freq (Hz)</th><th>Gain (dB)</th><th>Q</th><th></th></tr></thead>
+        <tbody id="filter-rows"></tbody>
+      </table>
+      <div class="row-actions">
+        <button id="add-filter" type="button" class="ghost">+ Add filter</button>
+        <span class="spacer"></span>
+        <button id="revert-filters" type="button" class="ghost" hidden>Revert</button>
+        <button id="apply-filters" type="button" class="primary" hidden>Apply</button>
+      </div>
+      <p id="filter-error" class="error" hidden></p>
+      <div class="presets">
+        <h3 class="sub">Presets</h3>
+        <div class="row-actions">
+          <select id="preset-select" aria-label="Saved presets"></select>
+          <button id="preset-load" type="button" class="ghost">Load</button>
+          <span class="spacer"></span>
+          <input id="preset-name-input" type="text" placeholder="Name" aria-label="Preset name">
+          <button id="preset-save" type="button" class="ghost">Save</button>
+        </div>
+        <p id="preset-msg" class="muted small"></p>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="measure-title">
+      <h2 id="measure-title">Measure</h2>
+      <div id="phone-status" class="phone"></div>
+      <div class="options">
+        <label>Positions <input id="opt-positions" type="number" min="1" max="5" value="3"></label>
+        <label>Sweeps each <input id="opt-repeats" type="number" min="1" max="3" value="1"></label>
+        <label>Auto-tune rounds <input id="opt-iterations" type="number" min="1" max="5" value="3"></label>
+      </div>
+      <div class="row-actions">
+        <button id="start-measure" type="button" class="ghost">Measure &amp; solve</button>
+        <button id="start-autotune" type="button" class="primary">Auto-tune</button>
+        <button id="start-verify" type="button" class="ghost" title="4 sweeps without moving the phone">Verify EQ</button>
+      </div>
+      <p class="muted small">Auto-tune measures, applies the EQ live, re-measures, and keeps the best result.
+        Verify checks, without moving the phone, that the EQ reaches the speakers as designed and that the
+        speaker sounds the same at two volumes. Music is muted while either runs.</p>
+      <div id="job" hidden>
+        <div id="job-prompt" class="prompt" hidden>
+          <p id="job-prompt-text"></p>
+          <button id="job-continue" type="button" class="primary">Continue</button>
+        </div>
+        <div class="row-actions">
+          <span id="job-state" class="pill"></span>
+          <span class="spacer"></span>
+          <button id="job-cancel" type="button" class="ghost">Cancel</button>
+        </div>
+        <pre id="job-log" class="log"></pre>
+        <div id="job-result"></div>
+      </div>
+    </section>
+
+    <section class="card notes" aria-labelledby="notes-title">
+      <h2 id="notes-title">Notes</h2>
+      <ul id="notes" class="warn-list"></ul>
+      <p id="limits" class="muted"></p>
+    </section>
+  </main>
+  <div id="tooltip" class="tooltip" hidden></div>
+  <script src="/static/dashboard.js"></script>
+</body>
+</html>

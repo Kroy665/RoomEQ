@@ -1,0 +1,255 @@
+1
+00:00:00,000 --> 00:00:01,032
+This is RoomEQ.
+
+2
+00:00:01,032 --> 00:00:04,680
+It tunes a home audio system to the room it lives in.
+
+3
+00:00:04,680 --> 00:00:13,765
+It measures the room with an iPhone microphone, works out a parametric E Q, and applies it in real time to everything the Mac plays.
+
+4
+00:00:13,765 --> 00:00:16,655
+Every part of it runs locally, on the Mac.
+
+5
+00:00:17,008 --> 00:00:21,477
+For this tour it runs in demo mode, shown by the blue badge at the top.
+
+6
+00:00:21,477 --> 00:00:25,693
+The audio engine, the solver and this dashboard are the real thing.
+
+7
+00:00:25,693 --> 00:00:27,959
+Only the outside world is simulated.
+
+8
+00:00:27,959 --> 00:00:36,330
+A music source, a small living room with a two point one speaker system, and a virtual phone that follows the instructions on screen.
+
+9
+00:00:36,682 --> 00:00:38,995
+The top bar controls the live audio.
+
+10
+00:00:38,995 --> 00:00:41,950
+E Q on, or bypass, for a quick A B comparison.
+
+11
+00:00:41,950 --> 00:00:46,062
+Bypass keeps the same preamp, so you compare tone, not loudness.
+
+12
+00:00:46,062 --> 00:00:49,917
+A volume trim, and live meters for the input and the output.
+
+13
+00:00:49,917 --> 00:00:57,241
+Next to them, the limiter, the added latency, the clock drift between the two audio devices, and a glitch counter.
+
+14
+00:00:57,594 --> 00:01:02,275
+Safety comes first, because a bad filter should never blast the speakers.
+
+15
+00:01:02,275 --> 00:01:08,816
+The panic button, or the space bar, bypasses the E Q instantly and drops the level by twenty decibels.
+
+16
+00:01:08,816 --> 00:01:11,574
+Press it again and the sound fades back in.
+
+17
+00:01:11,574 --> 00:01:15,935
+Behind it sits a look-ahead limiter that never lets the output clip.
+
+18
+00:01:16,288 --> 00:01:18,062
+Measuring starts down here.
+
+19
+00:01:18,062 --> 00:01:21,938
+On a real setup you scan this card's code with your iPhone.
+
+20
+00:01:21,938 --> 00:01:32,974
+The phone opens a small web page, and streams raw microphone audio to the Mac over Wi-Fi, with echo cancellation, noise suppression and automatic gain all switched off.
+
+21
+00:01:32,974 --> 00:01:35,930
+Here, the virtual phone is already connected.
+
+22
+00:01:36,282 --> 00:01:39,272
+This is the page the phone sees the first time.
+
+23
+00:01:39,272 --> 00:01:48,178
+Safari only allows the microphone over a secure connection, so it walks you through trusting RoomEQ's own certificate, in three short steps.
+
+24
+00:01:48,178 --> 00:01:54,921
+After that, it shows a start button, a live level meter, and the instructions for each listening position.
+
+25
+00:01:55,273 --> 00:01:56,720
+Now the main job, live.
+
+26
+00:01:56,720 --> 00:01:57,349
+Auto-tune.
+
+27
+00:01:57,349 --> 00:02:00,242
+A short burst of noise checks the level first.
+
+28
+00:02:00,242 --> 00:02:06,093
+Then the Mac plays a sweep from twenty hertz to twenty kilohertz, framed by two sync markers.
+
+29
+00:02:06,093 --> 00:02:15,214
+The phone and the Mac run on different clocks, so the markers also measure the clock drift, and the recording is corrected before it is analysed.
+
+30
+00:02:15,564 --> 00:02:19,147
+After the first round, the solver fits up to ten filters.
+
+31
+00:02:19,147 --> 00:02:23,107
+It prefers cuts over boosts, and leaves deep narrow dips alone.
+
+32
+00:02:23,107 --> 00:02:29,833
+Then every listening position is measured twice, with the E Q off and with it on, without moving the phone.
+
+33
+00:02:29,833 --> 00:02:36,999
+That way the improvement it reports is a fair comparison, even in a room where the bass changes from seat to seat.
+
+34
+00:02:36,999 --> 00:02:38,257
+The best round wins.
+
+35
+00:02:44,669 --> 00:02:45,864
+Here is the result.
+
+36
+00:02:45,864 --> 00:02:48,127
+Orange is the room before, measured.
+
+37
+00:02:48,127 --> 00:02:51,334
+Blue is after, also measured, through the live E Q.
+
+38
+00:02:51,334 --> 00:02:56,363
+The dotted line is the target, with a gentle bass lift and a slight treble tilt.
+
+39
+00:02:56,363 --> 00:02:58,438
+The bands show where it corrects.
+
+40
+00:02:58,438 --> 00:03:06,423
+Fully below five hundred hertz, gently up to four kilohertz, and not at all above that, where a phone microphone is unreliable.
+
+41
+00:03:06,776 --> 00:03:12,998
+Below it is the E Q the engine is applying, including the automatic preamp that keeps headroom.
+
+42
+00:03:12,998 --> 00:03:15,093
+Hover anywhere for exact values.
+
+43
+00:03:15,093 --> 00:03:18,695
+Every number in the chart is also available as a table.
+
+44
+00:03:22,048 --> 00:03:24,029
+The filters are fully editable.
+
+45
+00:03:24,029 --> 00:03:25,435
+Frequency, gain and Q.
+
+46
+00:03:25,435 --> 00:03:27,544
+Let's soften this one, and apply.
+
+47
+00:03:27,544 --> 00:03:33,040
+The new E Q runs silently for a moment, then crossfades in, so there is never a click.
+
+48
+00:03:33,040 --> 00:03:40,837
+The chart switches to a dashed prediction until the next measurement, and values that could hurt the speakers are refused.
+
+49
+00:03:41,189 --> 00:03:43,401
+Verify E Q checks the whole chain.
+
+50
+00:03:43,401 --> 00:03:46,394
+Four sweeps, with the phone left in one place.
+
+51
+00:03:46,394 --> 00:03:51,663
+Bypassed, through the E Q, ten decibels quieter, and once more for repeatability.
+
+52
+00:03:51,663 --> 00:03:54,526
+Because nothing moves, the room cancels out.
+
+53
+00:03:54,526 --> 00:04:01,812
+It proves the E Q reaches the speakers exactly as designed, and that the speaker sounds the same at both levels.
+
+54
+00:04:02,163 --> 00:04:09,653
+Now a real result, from an actual living room, with an F and D two point one speaker system and an iPhone fifteen.
+
+55
+00:04:09,653 --> 00:04:12,937
+Before, a bass build-up of more than ten decibels.
+
+56
+00:04:12,937 --> 00:04:17,339
+After, measured through the E Q, the bass sits close to the target.
+
+57
+00:04:17,339 --> 00:04:21,741
+Every result is saved as a preset, and nothing is ever overwritten.
+
+58
+00:04:22,093 --> 00:04:24,290
+RoomEQ is honest about its limits.
+
+59
+00:04:24,290 --> 00:04:27,199
+These notes come from the measurement itself.
+
+60
+00:04:27,199 --> 00:04:34,050
+No E Q can fill a room null or fix speaker placement, and a phone microphone is rough at high frequencies.
+
+61
+00:04:34,050 --> 00:04:41,159
+When the bass is simply too loud, it tells you to turn the subwoofer down on the speaker, which beats any E Q.
+
+62
+00:04:41,511 --> 00:04:51,754
+Under the hood, the audio path is allocation free and compiled, with an adaptive resampler that tracks clock drift, all covered by more than seventy automated tests.
+
+63
+00:04:51,754 --> 00:04:52,188
+RoomEQ.
+
+64
+00:04:52,188 --> 00:04:56,161
+Measure with your phone, hear your room the way it should sound.
